@@ -1,5 +1,5 @@
-$body-bg: #1a2433;
-$body-color: #f7fafa;
+$body-bg: rgb(22, 22, 27);
+$body-color: rgb(197, 197, 207);
 
 $main-bg: darken($body-bg, 4%);
 
@@ -11,11 +11,11 @@ $dark: darken($body-bg, 8%);
 	"dark": #292e33
 );*/
 
-
-$blue: #0d6efd;
-$light: darken(#f8f9fa, 5%);
+$bg-secondary: rgb(44, 44, 54);
+$blue: rgb(197, 197, 207);
+$light: darken(#77828e, 5%);
 $link-color: $blue;
-$card-highlight-color: #3d76cc;
+$card-highlight-color: darken(rgb(197, 197, 207), 10%);
 
 $table-striped-bg-factor: 0.15;
 
@@ -33,7 +33,7 @@ $border-color: lighten($body-bg, 4%);
 
 $card-border-color: $border-color;
 
-$link-hover-color:			#408cff;
+$link-hover-color:			$card-highlight-color;
 
 
 /*$table-striped-bg: lighten($body-bg, 2%);*/
@@ -157,7 +157,8 @@ $nav-tabs-border-color: $body-color;
 }
 
 .bg-main {
-	background-color: $main-bg !important;
+	background-color: transparent !important;
+	filter: none !important;
 }
 
 .bg-darken {
@@ -165,10 +166,17 @@ $nav-tabs-border-color: $body-color;
 }
 
 
-$header-footer-bg: #112138;
+$header-footer-bg: rgba(0,0,0);
 
 .bg-header-footer {
+	// backdrop-filter: blur(6px);
 	background-color: $header-footer-bg !important;
+}
+
+.navbar {
+	z-index:2;
+	backdrop-filter: blur(6px);
+	background-color: rgba(0,0,0,0.05) !important;
 }
 
 .bg-header-footer-highlight {
@@ -190,7 +198,7 @@ $header-footer-bg: #112138;
 }
 
 .border-card-highlight-badge {
-	border-color: #183662 !important;
+	border-color: lighten($body-bg, 12%) !important;
 }
 
 .border-dark {
@@ -208,7 +216,7 @@ $header-footer-bg: #112138;
 }
 
 .border-dotted {
-	border-bottom: dotted 1px #6688bc;
+	border-bottom: dotted 1px #b1b1b2;
 }
 
 code {

@@ -15,6 +15,51 @@ $spacers: (
 
 $enable-negative-margins: true;
 
+.hero {
+	position: fixed;
+	z-index:-1;
+	background-image: url("/img/zeus/bg.webp") !important;
+	background-position: top right;
+	top: 0;
+	margin-right: -10rem;
+	aspect-ratio: 16 / 9;
+	height: auto;
+	width: calc(100% + 5rem);
+	max-width: calc(100% + 5rem);
+	background-size: auto !important;
+	// background-position: left !important;
+}
+
+.hero::before {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	content: "";
+	background: linear-gradient(180deg, #16161b 6.5%, #16161b00 17.97%), radial-gradient(75% 90% at 80% 3.7%, #0000 26.06%, #16161b 99.99%);
+}
+
+.hero::after {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: block;
+	width: 100%;
+	height: 100%;
+	content: "";
+	background: linear-gradient(270deg, #16161b 10%, #16161b00 50%);
+}
+
+.light-beam {
+	position: absolute;
+	right:0;
+	width: 32px;
+	height: 794.398px;
+	background-image: linear-gradient(to right bottom, rgba(0, 0, 0, 0) 0%, rgb(178, 131, 255) 100%);
+	filter: blur(50px);
+	transform: matrix(0.766044, 0.642788, -0.642788, 0.766044, 0, 0);
+}
 
 /*$grid-breakpoints: (
 	xs: 0,
@@ -50,6 +95,22 @@ $link-hover-decoration:		underline !default;
 $border-radius:               .4rem !default;
 $border-radius-lg:            .5rem !default;
 
+span.badge.bg-secondary {
+	background: lighten($body-bg, 10)
+}
+span.badge.bg-secondary::before {
+	position: absolute;
+	inset: 0;
+	z-index: -10;
+	width: 100%;
+	height: 100%;
+	border-radius: inherit;
+	opacity: .6;
+	// --un-blur: blur(4px);
+	// filter: var(--un-blur) var(--un-brightness) var(--un-contrast) var(--un-drop-shadow) var(--un-grayscale) var(--un-hue-rotate) var(--un-invert) var(--un-saturate) var(--un-sepia);
+	content: "";
+	background: linear-gradient(90deg, #b283ff, #fd83ff, #ffd983, #ffbf83);
+}
 
 $badge-border-radius: 0.2rem;
 $badge-font-weight: 400;
@@ -109,11 +170,11 @@ code {
 }
 
 .icon-shadow {
-	filter: drop-shadow(1px 1px 1px #666);
+	filter: drop-shadow(1px 1px 1px rgb(197, 197, 207));
 }
 
 .icon-shadow-dark {
-	filter: drop-shadow(1px 1px 1px #262626);
+	filter: drop-shadow(1px 1px 1px rgba(22,22,27));
 }
 
 .text-darken {
@@ -176,12 +237,13 @@ code {
 
 body {
 	/*font-size: 14px;*/
-	font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+	background-color: #16161b !important;
+	font-family: 'Rethink Sans', -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
 	/*font: 14px 'Open Sans', "Lucida Grande", Helvetica, Arial, sans-serif;*/
 }
 
 .font-serif {
-	font-family: Georgia, Garamond, serif !important;
+	font-family: 'Rethink Sans', Georgia, Garamond, serif !important;
 }
 
 hr {
@@ -229,6 +291,13 @@ code, .font-json, .font-data, .font-plaintext {
 
 .summary-row:last-child {
 	margin-bottom: 0 !important;
+}
+
+.text-success {
+	-webkit-background-clip: text !important;
+	background-clip: text !important;
+	color: transparent !important;
+	background-image: linear-gradient(91.08deg, #ddc8ff 0.91%,#fecbff 52.8%,#ffe0c3 79.79%,#fff1d0 97.48%) !important;
 }
 
 

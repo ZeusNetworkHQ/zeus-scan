@@ -18,9 +18,9 @@ html(lang="en")
 		+themeCss
 		
 
-		link(id="canonical" rel="canonical" href="https://bitcoinexplorer.org")
+		link(id="canonical" rel="canonical" href="https://zeusnetwork.xyz")
 
-		meta(property="og:title" content=(metaTitle != undefined ? metaTitle : "BitcoinExplorer.org - Open-Source Bitcoin Explorer"))
+		meta(property="og:title" content=(metaTitle != undefined ? metaTitle : "Zeus Scan - Muses Testnet Explorer"))
 		meta(property="og:description" content=(metaDesc != undefined ? metaDesc : "Open-source, easy-to-use, educational Bitcoin explorer whose only dependency is your Bitcoin Core node."))
 		meta(property="og:image" content="https://bitcoinexplorer.org/img/preview.png")
 
@@ -36,14 +36,15 @@ html(lang="en")
 		if (!network.endsWith("net") && network != "regtest")
 			- network = (network + "net"); // handles "main" -> "mainnet" and "test" -> "testnet"
 
+		link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap")
 		link(rel="apple-touch-icon", sizes="180x180", href=assetUrl(`./img/network-${network}/apple-touch-icon.png`))
 		link(rel="icon", type="image/png", sizes="32x32", href=assetUrl(`./img/network-${network}/favicon-32x32.png`))
 		link(rel="icon", type="image/png", sizes="16x16", href=assetUrl(`./img/network-${network}/favicon-16x16.png`))
 		link(rel="manifest", href=`./img/network-${network}/site.webmanifest`)
 		link(rel="mask-icon", href=`./img/network-${network}/safari-pinned-tab.svg`, color="#f7931a")
 		link(rel="shortcut icon", href=assetUrl(`./img/network-${network}/favicon.ico`))
-		meta(name="apple-mobile-web-app-title", content="BTC Explorer")
-		meta(name="application-name", content="BTC Explorer")
+		meta(name="apple-mobile-web-app-title", content="Zeus Scan")
+		meta(name="application-name", content="Zeus Scan")
 		meta(name="msapplication-TileColor", content="#022e70")
 		meta(name="msapplication-config", content=`./img/network-${network}/browserconfig.xml`)
 		meta(name="theme-color" content="#022e70")
@@ -53,25 +54,15 @@ html(lang="en")
 		block headContent
 			title Explorer
 
-	body.bg-header-footer
+	body
+		.hero
+			.light-beam
 		nav.navbar.navbar-expand-md.navbar-dark.bg-header-footer
 			.container
 				a.navbar-brand(href="./")
 					span
-						if (coinConfig.logoUrlsByNetwork && coinConfig.logoUrlsByNetwork[activeBlockchain])
-							img.header-image(src=assetUrl(coinConfig.logoUrlsByNetwork[activeBlockchain]), alt="logo")
-						else
-							img.header-image(src=assetUrl("./img/network-mainnet/logo.svg"), alt="logo")
-
-						if (coinConfig.siteTitlesByNetwork && coinConfig.siteTitlesByNetwork[activeBlockchain])
-							span.fw-light #{coinConfig.siteTitlesByNetwork[activeBlockchain]}
-						else
-							span.fw-light Bitcoin Explorer
-
-				if (false && config.demoSite)
-					- var networkNameMap = {"main": "Mainnet", "test": "Testnet", "signet": "Signet"};
-					span.badge.bg-primary(title=`This is a public demo, but this tool is designed to be installed and run by all Bitcoiners...<br/><i>Don't Trust, Verify</i>!`, data-bs-toggle="tooltip", data-bs-html="true")
-						span Public Demo
+						img.header-image(src=assetUrl("./img/zeus/logo.svg"), alt="logo")
+						span <strong>Zeus</strong> Scan
 						
 				button.navbar-toggler.navbar-toggler-end(type="button", data-bs-toggle="collapse", data-bs-target="#navbarNav", aria-label="collapse navigation")
 					span.navbar-toggler-icon
@@ -248,13 +239,6 @@ html(lang="en")
 
 		footer.footer.border-top.border-primary.bg-header-footer.pt-3.pb-1.px-3.text-white(style="border-width: 5px !important;")
 			.container
-				if (!crawlerBot && global.rpcConnected)
-					.mb-4.mx-6
-						iframe(id="quoteIframe", title="A Bitcoin Quote of the Day", src="./snippet/quote/random", onload="iframeLoaded('quoteIframe');", scrolling="no", height="0", style="width: 100%;")
-
-					hr
-
-				
 				.row.mt-4.mb-6
 					.col-lg-3
 						.mb-4

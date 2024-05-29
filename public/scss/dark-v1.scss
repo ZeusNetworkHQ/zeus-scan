@@ -1,4 +1,4 @@
-$body-bg: #051c3e;
+$body-bg: rgb(22 22 27);
 $body-color: #f7fafa;
 
 $main-bg: darken($body-bg, 6%);
@@ -12,9 +12,9 @@ $dark: #22272b;
 );*/
 
 
-$blue: #0d6efd;
+$blue: rgb(253, 131, 255);
 $link-color: $blue;
-$card-highlight-color: #406fb4;
+$card-highlight-color: rgb(253, 131, 255);
 
 $bg-nav-link-hover: lighten($body-bg, 5%);
 
@@ -145,10 +145,10 @@ $nav-tabs-border-color: $body-color;
 
 
 .bg-main {
-	background-color: $main-bg !important;
+	background-color: transparent !important;
 }
 
-$header-footer-bg: #112138;
+$header-footer-bg: #0000003c;
 
 .bg-header-footer {
 	background-color: $header-footer-bg !important;
@@ -171,7 +171,7 @@ $header-footer-bg: #112138;
 }
 
 .border-card-highlight-badge {
-	border-color: #183662 !important;
+	border-color: lighten($body-bg, 20%) !important;
 }
 
 .border-dark {

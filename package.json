@@ -7,6 +7,7 @@
 	"scripts": {
 		"start": "node ./bin/www",
 		"test": "node ./bin/test.js",
+		"dev": "BTCEXP_HOST=0.0.0.0 BTCEXP_PORT=3007 BTCEXP_BITCOIND_HOST=127.0.0.1 BTCEXP_BITCOIND_PORT=18443 BTCEXP_BITCOIND_USER=bitcoin BTCEXP_BITCOIND_PASS=bitcoin BTCEXP_ADDRESS_API=electrum BTCEXP_BITCOIND_RPC_TIMEOUT=5000 BTCEXP_ELECTRUM_SERVERS=tcp://localhost:50001 BTCEXP_ELECTRUM_TXINDEX=true BTCEXP_UI_THEME=dark nodemon ./bin/www",
 		"miners": "node ./bin/refresh-mining-pool-configs.js",
 		"integrity": "node ./bin/frontend-resource-integrity.js",
 		"lint": "eslint app routes",
