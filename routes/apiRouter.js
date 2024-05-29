@@ -232,7 +232,7 @@ router.get("/blockchain/coins", asyncHandler(async (req, res, next) => {
 
 		let getblockchaininfo = await coreApi.getBlockchainInfo();
 		let estimatedSupply = utils.estimatedSupply(getblockchaininfo.blocks);
-		let lastCheckpoint = coinConfig.utxoSetCheckpointsByNetwork[global.activeBlockchain];
+		let lastCheckpoint = coinConfig.utxoSetCheckpointsByNetwork[global.activeBlockchain] || { height: 0 };
 
 		res.send({
 			supply: estimatedSupply.toString(),

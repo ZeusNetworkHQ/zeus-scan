@@ -83,7 +83,7 @@ module.exports = {
 	siteTitlesByNetwork: {
 		"main":"Bitcoin Explorer",
 		"test":"Testnet Explorer",
-		"regtest":"Zeus Scan",
+		"regtest":"ZeusScan",
 		"signet":"Signet Explorer",
 	},
 	demoSiteUrlsByNetwork: {

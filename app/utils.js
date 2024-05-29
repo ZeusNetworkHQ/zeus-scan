@@ -688,40 +688,29 @@ function getBlockTotalFeesFromCoinbaseTxAndBlockHeight(coinbaseTx, blockHeight) 
 }
 
 function estimatedSupply(height) {
-	const checkpoint = coinConfig.utxoSetCheckpointsByNetwork[global.activeBlockchain];
+    const halvingPeriod = new Decimal(coinConfig.halvingBlockIntervalsByNetwork[global.activeBlockchain]);
+	const initialReward = new Decimal(50);
 
-	let checkpointHeight = 0;
-	let checkpointSupply = new Decimal(50);
+    // Calculate the number of complete halving periods
+    let numHalvings = new Decimal(height).dividedToIntegerBy(halvingPeriod);
 
-	if (checkpoint && checkpoint.height <= height) {
-		//console.log("using checkpoint");
-		checkpointHeight = checkpoint.height;
-		checkpointSupply = new Decimal(checkpoint.total_amount);
-	}
+    // Calculate the total supply for all complete halving periods
+    let factor = new Decimal(0.5);
+    let supply = initialReward.times(
+        factor.pow(numHalvings).negated().plus(1)
+    ).dividedBy(
+        factor.negated().plus(1)
+    ).times(halvingPeriod);
 
-	let halvingBlockInterval = coinConfig.halvingBlockIntervalsByNetwork[global.activeBlockchain];
+    // Calculate the remaining blocks after the last complete halving period
+    let remainingBlocks = new Decimal(height).minus((halvingPeriod.mul(numHalvings)));
 
-	let supply = checkpointSupply;
+    // Calculate the reward for the remaining blocks
+    let currentReward = initialReward.mul(factor.pow(numHalvings));
+	// return currentReward
+    supply = supply.plus(remainingBlocks.times(currentReward));
 
-	let i = checkpointHeight;
-	while (i < height) {
-		let nextHalvingHeight = halvingBlockInterval * Math.floor(i / halvingBlockInterval) + halvingBlockInterval;
-		
-		if (height < nextHalvingHeight) {
-			let heightDiff = height - i;
-
-			//console.log(`adding(${heightDiff}): ` + new Decimal(heightDiff).times(coinConfig.blockRewardFunction(i, global.activeBlockchain)));
-			return supply.plus(new Decimal(heightDiff).times(coinConfig.blockRewardFunction(i, global.activeBlockchain)));
-		}
-
-		let heightDiff = nextHalvingHeight - i;
-
-		supply = supply.plus(new Decimal(heightDiff).times(coinConfig.blockRewardFunction(i, global.activeBlockchain)));
-		
-		i += heightDiff;
-	}
-
-	return supply;
+    return supply;
 }
 
 async function refreshExchangeRates() {
@@ -1466,18 +1455,17 @@ function nextHalvingEstimates(eraStartBlockHeader, currentBlockHeader, difficult
 	let nextHalvingDate = new Date(new Date().getTime() + secondsUntilNextHalving * 1000);
 
 	return {
-		blockCount: blockCount,
-		halvingBlockInterval: halvingBlockInterval,
-		halvingCount: halvingCount,
-		nextHalvingIndex: nextHalvingIndex,
-		terminalHalvingCount: terminalHalvingCount,
-		nextHalvingBlock: nextHalvingBlock,
-		blocksUntilNextHalving: blocksUntilNextHalving,
-		targetBlockTimeSeconds: targetBlockTimeSeconds,
-		daysUntilNextHalving: daysUntilNextHalving,
-		nextHalvingDate: nextHalvingDate,
-
-		difficultyAdjustmentData: difficultyAdjustmentData
+		blockCount,
+		halvingBlockInterval,
+		halvingCount,
+		nextHalvingIndex,
+		terminalHalvingCount,
+		nextHalvingBlock,
+		blocksUntilNextHalving,
+		argetBlockTimeSeconds,
+		daysUntilNextHalving,
+		nextHalvingDate,
+		difficultyAdjustmentData
 	};
 }
 

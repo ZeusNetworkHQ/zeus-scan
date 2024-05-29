@@ -122,7 +122,7 @@ router.get("/index-halving-countdown", asyncHandler(async (req, res, next) => {
 
 		let nextHalvingData = utils.nextHalvingEstimates(res.locals.difficultyPeriodFirstBlockHeader, res.locals.latestBlocks[0]);
 
-		res.locals.nextHalvingData = nextHalvingData;
+		res.locals.nextHalvingData = nextHalvingData
 
 		await utils.timePromise("snippet.index-halving-countdown.render", async () => {
 			res.render("snippets/index-halving-countdown");
