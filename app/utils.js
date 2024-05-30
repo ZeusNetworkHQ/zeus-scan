@@ -1462,7 +1462,7 @@ function nextHalvingEstimates(eraStartBlockHeader, currentBlockHeader, difficult
 		terminalHalvingCount,
 		nextHalvingBlock,
 		blocksUntilNextHalving,
-		argetBlockTimeSeconds,
+		targetBlockTimeSeconds,
 		daysUntilNextHalving,
 		nextHalvingDate,
 		difficultyAdjustmentData
